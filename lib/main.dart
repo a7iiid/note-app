@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/core/routes.dart';
 import 'package:note_app/core/them.dart';
 
 void main() {
@@ -12,6 +13,7 @@ class Think extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeApp.themeapp,
+      routerConfig: routes,
     );
   }
 }
