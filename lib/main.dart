@@ -13,6 +13,7 @@ class Think extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeApp.themeapp,
+      debugShowCheckedModeBanner: false,
       routerConfig: routes,
     );
   }
