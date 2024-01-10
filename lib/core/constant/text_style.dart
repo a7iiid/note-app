@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 abstract class style {
@@ -20,5 +22,26 @@ abstract class style {
     fontWeight: FontWeight.w400,
     color: Color(0xff131313),
     height: 112 / 12,
+  );
+  static TextStyle NoteListSubject = const TextStyle(
+    fontFamily: "Roboto",
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: Color(0xff7c7c7c),
+    height: 14 / 12,
+  );
+  static TextStyle NoteCatogNotSelect = const TextStyle(
+    fontFamily: "Roboto",
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: Color(0xff7c7c7c),
+    height: 14 / 12,
+  );
+  static TextStyle NoteCatogSelect = const TextStyle(
+    fontFamily: "Roboto",
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+    color: Color.fromARGB(255, 249, 249, 249),
+    height: 14 / 12,
   );
 }

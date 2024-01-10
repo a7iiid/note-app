@@ -12,6 +12,7 @@ class Think extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      themeMode: ThemeMode.dark,
       theme: ThemeApp.themeapp,
       debugShowCheckedModeBanner: false,
       routerConfig: routes,
