@@ -6,11 +6,13 @@ import 'package:note_app/BlocObserver.dart';
 import 'package:note_app/core/constant/constant.dart';
 import 'package:note_app/core/routes.dart';
 import 'package:note_app/core/them.dart';
-import 'package:note_app/fetuers/home/presantaion/cubit/note_cubit.dart';
+import 'package:note_app/fetuers/home/presantaion/add_note/add_note_cubit.dart';
+import 'package:note_app/fetuers/home/presantaion/note/note_cubit.dart';
 import 'package:note_app/fetuers/models/note_model/NoteModel.dart';
 
 void main() async {
   Bloc.observer = MyBlocObserver();
+  Hive.registerAdapter(ColorAdapter());
 
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
@@ -22,8 +24,11 @@ class Think extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NoteCubit(homerepo)..getNote(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => NoteCubit(homerepo)..getNote()),
+        BlocProvider(create: (context) => AddNoteCubit())
+      ],
       child: MaterialApp.router(
         themeMode: ThemeMode.dark,
         theme: ThemeApp.themeapp,

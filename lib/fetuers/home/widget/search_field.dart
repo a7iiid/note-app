@@ -22,7 +22,6 @@ class SearchField extends StatelessWidget {
               ),
               fillColor: const Color(0xffECECEC),
               contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-              // Here you can add the prefixIcon if you want to show an icon inside the TextField
               prefixIcon: const Icon(Icons.search),
             ),
           ),

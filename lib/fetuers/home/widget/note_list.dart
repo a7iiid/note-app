@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/core/constant/text_style.dart';
 import 'package:note_app/core/widget/note_Lodaing.dart';
 import 'package:note_app/core/widget/note_filure.dart';
-import 'package:note_app/fetuers/home/presantaion/cubit/note_cubit.dart';
+import 'package:note_app/fetuers/home/presantaion/note/note_cubit.dart';
 
 class NoteList extends StatelessWidget {
   const NoteList({super.key});
@@ -51,7 +51,7 @@ class NoteList extends StatelessWidget {
         if (state is NoteLoading) {
           return const CustomNoteLoading();
         } else {
-          return SliverToBoxAdapter();
+          return const SliverToBoxAdapter();
         }
       },
     );

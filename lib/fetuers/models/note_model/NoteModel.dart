@@ -3,17 +3,18 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:note_app/core/constant/colors.dart';
 part 'NoteModel.g.dart';
 
 @HiveType(typeId: 1)
-class NoteModel {
+class NoteModel extends HiveObject {
   @HiveField(0)
   String title;
 
   @HiveField(1)
   String note;
 
-  @HiveField(2)
+  @HiveField(2, defaultValue: Color(0xffD9E8FC))
   Color color;
 
   @HiveField(3)

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/core/constant/colors.dart';
 import 'package:note_app/core/constant/text_style.dart';
-import 'package:note_app/fetuers/home/presantaion/cubit/note_cubit.dart';
+import 'package:note_app/fetuers/home/presantaion/note/note_cubit.dart';
 
 class CategorySelector extends StatelessWidget {
   int selectedIndex = 0;

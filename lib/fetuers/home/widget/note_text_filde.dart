@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constant/constant.dart';
+
 class NoteTextFilde extends StatelessWidget {
   NoteTextFilde({super.key});
 
-  TextEditingController NoteController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(

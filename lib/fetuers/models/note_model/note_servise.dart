@@ -6,6 +6,7 @@ class NoteServise {
   final String _boxname = 'notetable';
   Future<Box<NoteModel>> get _box async =>
       await Hive.openBox<NoteModel>(_boxname);
+
   Future<void> addItem(NoteModel note) async {
     var box = await _box;
     box.add(note);

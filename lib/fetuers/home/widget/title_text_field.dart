@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constant/constant.dart';
+
 class TitleTextField extends StatelessWidget {
   TitleTextField({
     super.key,
   });
-  TextEditingController TitleController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -24,7 +24,7 @@ class HomeBody extends StatelessWidget {
               const SizedBox(
                 height: 18,
               ),
-              const TextField(),
+              const SearchField(),
               const SizedBox(
                 height: 18,
               ),
