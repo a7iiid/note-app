@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:note_app/core/constant/colors.dart';
 import 'package:note_app/core/constant/text_style.dart';
 import 'package:note_app/fetuers/models/note_model/NoteModel.dart';
 import 'package:note_app/fetuers/models/note_model/note_servise.dart';
@@ -20,35 +21,40 @@ class AddNoteForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       key: _key,
-      child: ListView(children: [
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              TitleTextField(),
-              NoteTextFilde(),
-              ColorSelecte(),
-              ElevatedButton(
-                child: Text(
-                  'Add note',
-                  style: style.TitleNoteBold14,
-                ),
-                onPressed: () async {
-                  NoteModel note = NoteModel(
-                      category: 'All',
-                      color: colornote,
-                      title: TitleController.text,
-                      note: NoteController.text);
-                  NoteServise.get(context).addItem(note);
+      child: Scaffold(
+        body: ListView(children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                TitleTextField(),
+                NoteTextFilde(),
+                ColorSelecte(),
+                ElevatedButton(
+                  child: Text(
+                    'Add note',
+                    style: style.TitleNoteBold14,
+                  ),
+                  onPressed: () async {
+                    NoteModel note = NoteModel(
+                        category: 'All',
+                        color: colornote,
+                        title: TitleController.text,
+                        note: NoteController.text);
+                    NoteServise.get(context).addItem(note);
+                    TitleController = TextEditingController();
+                    NoteController = TextEditingController();
+                    colornote = ColorApp.ColorNote1;
 
-                  Navigator.pop(context);
-                },
-              ),
-            ],
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 }

@@ -26,10 +26,10 @@ class NoteCubit extends Cubit<NoteState> {
     result.fold((filuer) {
       emit(NoteFailure(error: filuer));
     }, (notes) {
-      if (notes != null) {
-        emit(NoteSuccess(note: notes));
+      if (notes == null) {
+        emit(NoteNull(notenull: CustomNoteNull()));
       }
-      emit(NoteNull(notenull: CustomNoteNull()));
+      emit(NoteSuccess(note: notes));
     });
   }
 }

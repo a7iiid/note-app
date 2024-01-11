@@ -10,6 +10,8 @@ class NoteTextFilde extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         child: TextFormField(
+          maxLines: 20,
+          autocorrect: true,
           controller: NoteController,
           decoration: InputDecoration(
             labelText: ' Note',
@@ -21,8 +23,7 @@ class NoteTextFilde extends StatelessWidget {
             ),
 
             fillColor: const Color(0xffECECEC),
-            contentPadding: EdgeInsets.symmetric(
-                vertical: MediaQuery.sizeOf(context).height * .15),
+
             // Here you can add the prefixIcon if you want to show an icon inside the TextField
             prefixIcon: const Icon(Icons.notes_sharp),
           ),
