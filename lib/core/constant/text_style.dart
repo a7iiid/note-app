@@ -21,7 +21,6 @@ abstract class style {
     fontSize: 12,
     fontWeight: FontWeight.w400,
     color: Color(0xff131313),
-    height: 112 / 12,
   );
   static TextStyle NoteListSubject = const TextStyle(
     fontFamily: "Roboto",

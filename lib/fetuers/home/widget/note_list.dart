@@ -1,5 +1,7 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:note_app/core/constant/text_style.dart';
 import 'package:note_app/core/widget/note_Lodaing.dart';
 import 'package:note_app/core/widget/note_filure.dart';
@@ -18,46 +20,43 @@ class NoteList extends StatelessWidget {
           return SliverGrid.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
+              mainAxisSpacing: 8, // Added spacing between cards
+              crossAxisSpacing: 2,
             ),
             itemBuilder: (context, index) {
-              return FittedBox(
-                fit: BoxFit.fitHeight,
-                child: GestureDetector(
-                  onLongPress: () {
-                    NoteServise.get(context).deleteNote(index);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 18),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: state.note[index].color),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 10, left: 10, right: 10, bottom: 18),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(
-                                height: 18,
-                              ),
-                              Text(
-                                state.note[index].title,
-                                style: style.AppTileStyleSemiBold24,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              SizedBox(
-                                width: MediaQuery.sizeOf(context).width * .33,
-                                child: Text(
-                                  state.note[index].note,
-                                  style: style.NoteNormal12,
-                                  maxLines: 20,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ]),
+              // print(state.note[2].note);
+              return GestureDetector(
+                onLongPress: () async {
+                  await awesomedilog(context, index).show();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    color: state.note[index].color,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            state.note[index].title,
+                            style: style.AppTileStyleSemiBold24,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 8),
+                          Flexible(
+                            child: Text(
+                              state.note[index].note,
+                              style: style.NoteNormal12,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                        ],
                       ),
                     ),
                   ),
@@ -78,6 +77,19 @@ class NoteList extends StatelessWidget {
         } else {
           return const SliverToBoxAdapter();
         }
+      },
+    );
+  }
+
+  AwesomeDialog awesomedilog(BuildContext context, int index) {
+    return AwesomeDialog(
+      context: context,
+      animType: AnimType.rightSlide,
+      title: 'Delete',
+      dialogType: DialogType.warning,
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {
+        NoteServise.get(context).deleteNote(index);
       },
     );
   }
