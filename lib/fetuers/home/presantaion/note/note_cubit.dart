@@ -18,6 +18,7 @@ class NoteCubit extends Cubit<NoteState> {
   static get(context) => BlocProvider.of<NoteCubit>(context);
   void changeSelectedCategory() {
     emit(ChangNoteCategory());
+    getNote();
   }
 
   Future<void> getNote() async {
@@ -31,5 +32,11 @@ class NoteCubit extends Cubit<NoteState> {
       }
       emit(NoteSuccess(note: notes));
     });
+  }
+
+  Future<void> deletenote() async {
+    emit(Notedelete());
+
+    await getNote();
   }
 }

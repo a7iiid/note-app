@@ -6,6 +6,7 @@ import 'package:note_app/fetuers/models/note_model/NoteModel.dart';
 import 'package:note_app/fetuers/models/note_model/note_servise.dart';
 
 import '../../core/constant/constant.dart';
+import 'presantaion/note/note_cubit.dart';
 import 'widget/color_selecte.dart';
 import 'widget/note_text_filde.dart';
 import 'widget/title_text_field.dart';
@@ -28,6 +29,9 @@ class AddNoteForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
+                const SizedBox(
+                  height: 16,
+                ),
                 TitleTextField(),
                 NoteTextFilde(),
                 ColorSelecte(),
@@ -46,6 +50,7 @@ class AddNoteForm extends StatelessWidget {
                     TitleController = TextEditingController();
                     NoteController = TextEditingController();
                     colornote = ColorApp.ColorNote1;
+                    NoteCubit.get(context).getNote();
 
                     Navigator.pop(context);
                   },

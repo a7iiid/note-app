@@ -24,3 +24,5 @@ final class NoteNull extends NoteState {
 }
 
 final class ChangNoteCategory extends NoteState {}
+
+final class Notedelete extends NoteState {}

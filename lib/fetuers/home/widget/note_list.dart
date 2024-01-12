@@ -2,7 +2,9 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:note_app/core/constant/constant.dart';
 import 'package:note_app/core/constant/text_style.dart';
+import 'package:note_app/core/routes.dart';
 import 'package:note_app/core/widget/note_Lodaing.dart';
 import 'package:note_app/core/widget/note_filure.dart';
 import 'package:note_app/fetuers/home/presantaion/note/note_cubit.dart';
@@ -15,7 +17,6 @@ class NoteList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NoteCubit, NoteState>(
       builder: (context, state) {
-        NoteCubit.get(context).getNote();
         if (state is NoteSuccess) {
           return SliverGrid.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -24,39 +25,45 @@ class NoteList extends StatelessWidget {
               crossAxisSpacing: 2,
             ),
             itemBuilder: (context, index) {
-              // print(state.note[2].note);
-              return GestureDetector(
-                onLongPress: () async {
-                  await awesomedilog(context, index).show();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    color: state.note[index].color,
+              return ConstrainedBox(
+                constraints: BoxConstraints(minHeight: 500),
+                child: GestureDetector(
+                  onTap: () {
+                    colornote = state.note[index].color;
+                    TitleController.text = state.note[index].title;
+                    NoteController.text = state.note[index].note;
+                    GoRouter.of(context).push(keditnote, extra: index);
+                  },
+                  onLongPress: () async {
+                    await awesomedilog(context, index).show();
+                  },
+                  child: SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            state.note[index].title,
-                            style: style.AppTileStyleSemiBold24,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        color: state.note[index].color,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                state.note[index].title,
+                                style: style.AppTileStyleSemiBold24,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                state.note[index].note,
+                                style: style.NoteNormal12,
+                              ),
+                              const SizedBox(height: 8),
+                            ],
                           ),
-                          const SizedBox(height: 8),
-                          Flexible(
-                            child: Text(
-                              state.note[index].note,
-                              style: style.NoteNormal12,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                        ],
+                        ),
                       ),
                     ),
                   ),
@@ -88,8 +95,9 @@ class NoteList extends StatelessWidget {
       title: 'Delete',
       dialogType: DialogType.warning,
       btnCancelOnPress: () {},
-      btnOkOnPress: () {
-        NoteServise.get(context).deleteNote(index);
+      btnOkOnPress: () async {
+        await NoteCubit.get(context).deletenote();
+        await NoteServise.get(context).deleteNote(index);
       },
     );
   }

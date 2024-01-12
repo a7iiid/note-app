@@ -11,7 +11,7 @@ import 'package:note_app/fetuers/home/presantaion/note/note_cubit.dart';
 import 'package:note_app/fetuers/models/note_model/NoteModel.dart';
 
 void main() async {
-  // Bloc.observer = MyBlocObserver();
+  Bloc.observer = MyBlocObserver();
   Hive.registerAdapter(ColorAdapter());
 
   await Hive.initFlutter();
