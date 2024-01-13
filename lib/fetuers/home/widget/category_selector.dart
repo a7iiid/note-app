@@ -5,16 +5,6 @@ import 'package:note_app/core/constant/text_style.dart';
 import 'package:note_app/fetuers/home/presantaion/note/note_cubit.dart';
 
 class CategorySelector extends StatelessWidget {
-  int selectedIndex = 0;
-
-  final List<String> categories = [
-    'All',
-    'Important',
-    'Lecture notes',
-    'To-do lists',
-    'Shopping'
-  ];
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NoteCubit, NoteState>(
@@ -25,13 +15,11 @@ class CategorySelector extends StatelessWidget {
             height: 30,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
+              itemCount: NoteCubit.get(context).categories.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
-                    selectedIndex = index;
-                    print(selectedIndex);
-                    NoteCubit.get(context).changeSelectedCategory();
+                    NoteCubit.get(context).getNote(index);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),
@@ -39,13 +27,13 @@ class CategorySelector extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 6.0),
                       decoration: BoxDecoration(
-                        color: selectedIndex == index
+                        color: NoteCubit.get(context).categoryselect == index
                             ? Colors.black
                             : ColorApp.ColorContenerList,
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      child: Text(categories[index],
-                          style: selectedIndex == index
+                      child: Text(NoteCubit.get(context).categories[index],
+                          style: NoteCubit.get(context).categoryselect == index
                               ? style.NoteCatogSelect
                               : style.NoteCatogNotSelect),
                     ),

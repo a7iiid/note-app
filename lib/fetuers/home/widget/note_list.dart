@@ -118,8 +118,8 @@ class NoteList extends StatelessWidget {
       dialogType: DialogType.warning,
       btnCancelOnPress: () {},
       btnOkOnPress: () async {
-        await NoteCubit.get(context).deletenote();
         await NoteServise.get(context).deleteNote(index);
+        await NoteCubit.get(context).deletenote();
       },
     );
   }

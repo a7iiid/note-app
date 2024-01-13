@@ -29,7 +29,7 @@ class Think extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => NoteCubit(homerepo)..getNote()),
+        BlocProvider(create: (context) => NoteCubit(homerepo)..getNote(0)),
         BlocProvider(create: (context) => AddNoteCubit()),
       ],
       child: MaterialApp.router(

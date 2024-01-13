@@ -1,5 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+
 import 'package:note_app/core/constant/colors.dart';
 import 'package:note_app/core/constant/text_style.dart';
 import 'package:note_app/fetuers/models/note_model/NoteModel.dart';
@@ -17,7 +20,6 @@ class AddNoteForm extends StatelessWidget {
   });
 
   final _key = GlobalKey<FormFieldState>();
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -35,22 +37,14 @@ class AddNoteForm extends StatelessWidget {
                 TitleTextField(),
                 NoteTextFilde(),
                 ColorSelecte(),
+                category(),
                 ElevatedButton(
                   child: Text(
                     'Add note',
                     style: style.TitleNoteBold14,
                   ),
                   onPressed: () async {
-                    NoteModel note = NoteModel(
-                        category: 'All',
-                        color: colornote,
-                        title: TitleController.text,
-                        note: NoteController.text);
-                    NoteServise.get(context).addItem(note);
-                    TitleController = TextEditingController();
-                    NoteController = TextEditingController();
-                    colornote = ColorApp.ColorNote1;
-                    NoteCubit.get(context).getNote();
+                    await NoteCubit.get(context).addnote(context);
 
                     Navigator.pop(context);
                   },
@@ -60,6 +54,50 @@ class AddNoteForm extends StatelessWidget {
           ),
         ]),
       ),
+    );
+  }
+}
+
+class category extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<NoteCubit, NoteState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: Container(
+            height: 30,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: NoteCubit.get(context).categories.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    NoteCubit.get(context).category(index);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 6.0),
+                      decoration: BoxDecoration(
+                        color: NoteCubit.get(context).categoryselect == index
+                            ? Colors.black
+                            : ColorApp.ColorContenerList,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Text(NoteCubit.get(context).categories[index],
+                          style: NoteCubit.get(context).categoryselect == index
+                              ? style.NoteCatogSelect
+                              : style.NoteCatogNotSelect),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
