@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:note_app/core/constant/constant.dart';
 
 part 'search_note_state.dart';

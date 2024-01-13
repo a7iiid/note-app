@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:note_app/fetuers/home/presantaion/note/note_cubit.dart';
-import 'package:note_app/fetuers/search/presantation/search_note/search_note_cubit.dart';
+import 'package:note_app/fetuers/search/presantation/search/search_note_cubit.dart';
 
 class SearchField extends StatelessWidget {
   SearchField({
@@ -18,7 +17,7 @@ class SearchField extends StatelessWidget {
         builder: (context, state) {
           return Padding(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-              child: Container(
+              child: SizedBox(
                 height: 70,
                 child: TextField(
                   controller: searchController,

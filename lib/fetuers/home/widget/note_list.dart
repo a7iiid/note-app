@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +23,7 @@ class NoteList extends StatelessWidget {
         if (state is NoteSuccess) {
           return SliverToBoxAdapter(
             child: MasonryGridView.builder(
-              shrinkWrap: true, physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),
               gridDelegate:
                   const SliverSimpleGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
@@ -70,6 +72,7 @@ class NoteList extends StatelessWidget {
                                 Column(
                                   children: [
                                     Text(
+                                      // ignore: unnecessary_null_comparison
                                       searchfilterd != null &&
                                               searchfilterd.isNotEmpty
                                           ? searchfilterd[index].note

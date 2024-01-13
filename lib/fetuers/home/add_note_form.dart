@@ -1,14 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-
 import 'package:note_app/core/constant/colors.dart';
 import 'package:note_app/core/constant/text_style.dart';
-import 'package:note_app/fetuers/models/note_model/NoteModel.dart';
-import 'package:note_app/fetuers/models/note_model/note_servise.dart';
-
-import '../../core/constant/constant.dart';
 import 'presantaion/note/note_cubit.dart';
 import 'widget/color_selecte.dart';
 import 'widget/note_text_filde.dart';

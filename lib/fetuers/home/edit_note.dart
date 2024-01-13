@@ -1,5 +1,6 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:note_app/core/constant/colors.dart';
 import 'package:note_app/core/constant/text_style.dart';
 import 'package:note_app/fetuers/home/widget/color_selecte.dart';
