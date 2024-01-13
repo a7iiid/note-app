@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:note_app/core/constant/constant.dart';
 import 'package:note_app/core/constant/text_style.dart';
@@ -18,16 +19,16 @@ class NoteList extends StatelessWidget {
     return BlocBuilder<NoteCubit, NoteState>(
       builder: (context, state) {
         if (state is NoteSuccess) {
-          return SliverGrid.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+          return SliverToBoxAdapter(
+            child: MasonryGridView.builder(
+              shrinkWrap: true, physics: NeverScrollableScrollPhysics(),
+              gridDelegate:
+                  const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
               mainAxisSpacing: 8, // Added spacing between cards
               crossAxisSpacing: 2,
-            ),
-            itemBuilder: (context, index) {
-              return ConstrainedBox(
-                constraints: BoxConstraints(minHeight: 500),
-                child: GestureDetector(
+              itemBuilder: (context, index) {
+                return GestureDetector(
                   onTap: () {
                     colornote = state.note[index].color;
                     TitleController.text = state.note[index].title;
@@ -37,40 +38,51 @@ class NoteList extends StatelessWidget {
                   onLongPress: () async {
                     await awesomedilog(context, index).show();
                   },
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        color: state.note[index].color,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                state.note[index].title,
-                                style: style.AppTileStyleSemiBold24,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                state.note[index].note,
-                                style: style.NoteNormal12,
-                              ),
-                              const SizedBox(height: 8),
-                            ],
-                          ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      color: state.note[index].color,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  state.note[index].title,
+                                  style: style.AppTileStyleSemiBold24,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      state.note[index].note,
+                                      style: style.NoteNormal12,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                ),
-              );
-            },
-            itemCount: state.note.length,
+                );
+              },
+
+              itemCount: state.note.length,
+            ),
           );
         }
         if (state is NoteNull) {
