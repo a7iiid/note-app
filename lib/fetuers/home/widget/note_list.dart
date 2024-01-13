@@ -44,7 +44,9 @@ class NoteList extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      color: state.note[index].color,
+                      color: searchfilterd != null && searchfilterd.isNotEmpty
+                          ? searchfilterd[index].color
+                          : state.note[index].color,
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
@@ -52,7 +54,10 @@ class NoteList extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  state.note[index].title,
+                                  searchfilterd != null &&
+                                          searchfilterd.isNotEmpty
+                                      ? searchfilterd[index].title
+                                      : state.note[index].title,
                                   style: style.AppTileStyleSemiBold24,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -65,7 +70,10 @@ class NoteList extends StatelessWidget {
                                 Column(
                                   children: [
                                     Text(
-                                      state.note[index].note,
+                                      searchfilterd != null &&
+                                              searchfilterd.isNotEmpty
+                                          ? searchfilterd[index].note
+                                          : state.note[index].note,
                                       style: style.NoteNormal12,
                                     ),
                                   ],
@@ -81,7 +89,9 @@ class NoteList extends StatelessWidget {
                 );
               },
 
-              itemCount: state.note.length,
+              itemCount: searchfilterd.isEmpty
+                  ? state.note.length
+                  : searchfilterd.length,
             ),
           );
         }

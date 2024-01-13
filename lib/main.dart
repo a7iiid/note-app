@@ -10,6 +10,8 @@ import 'package:note_app/fetuers/home/presantaion/add_note/add_note_cubit.dart';
 import 'package:note_app/fetuers/home/presantaion/note/note_cubit.dart';
 import 'package:note_app/fetuers/models/note_model/NoteModel.dart';
 
+import 'fetuers/search/presantation/search_note/search_note_cubit.dart';
+
 void main() async {
   Bloc.observer = MyBlocObserver();
   Hive.registerAdapter(ColorAdapter());
@@ -27,7 +29,7 @@ class Think extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => NoteCubit(homerepo)..getNote()),
-        BlocProvider(create: (context) => AddNoteCubit())
+        BlocProvider(create: (context) => AddNoteCubit()),
       ],
       child: MaterialApp.router(
         themeMode: ThemeMode.dark,

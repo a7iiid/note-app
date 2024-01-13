@@ -4,7 +4,7 @@ import 'package:note_app/fetuers/splash/view/widget/title_app.dart';
 
 import 'category_selector.dart';
 import 'note_list.dart';
-import 'search_field.dart';
+import '../../search/search_field.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -24,7 +24,7 @@ class HomeBody extends StatelessWidget {
               const SizedBox(
                 height: 18,
               ),
-              const SearchField(),
+              SearchField(),
               const SizedBox(
                 height: 18,
               ),
