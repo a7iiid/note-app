@@ -9,7 +9,7 @@ abstract class ThemeApp {
     appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Color(0xffF2F2F2),
-        statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+        statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
       ),
     ),

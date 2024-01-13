@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -32,10 +33,19 @@ class Think extends StatelessWidget {
         BlocProvider(create: (context) => AddNoteCubit()),
       ],
       child: MaterialApp.router(
-        themeMode: ThemeMode.dark,
         theme: ThemeApp.themeapp,
         debugShowCheckedModeBanner: false,
         routerConfig: routes,
+        builder: (context, child) {
+          return AnnotatedRegion<SystemUiOverlayStyle>(
+            value: const SystemUiOverlayStyle(
+              statusBarColor: Color(0xffF2F2F2),
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.light,
+            ),
+            child: child!,
+          );
+        },
       ),
     );
   }
