@@ -17,7 +17,7 @@ class NoteCubit extends Cubit<NoteState> {
   NoteCubit(this.homeRepo) : super(NoteInitial());
 
   int categoryselect = 0;
-
+  String categoryitem = "All";
   static get(context) => BlocProvider.of<NoteCubit>(context);
 
   final List<String> categories = [
@@ -29,6 +29,7 @@ class NoteCubit extends Cubit<NoteState> {
   ];
   void category(int index) {
     categoryselect = index;
+    categoryitem = categories[index];
 
     emit(ChangNoteCategory());
   }

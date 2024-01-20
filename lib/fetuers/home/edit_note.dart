@@ -1,8 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/core/constant/colors.dart';
 import 'package:note_app/core/constant/text_style.dart';
+import 'package:note_app/fetuers/home/add_note_form.dart';
 import 'package:note_app/fetuers/home/widget/color_selecte.dart';
 import 'package:note_app/fetuers/home/widget/note_text_filde.dart';
 import 'package:note_app/fetuers/home/widget/title_text_field.dart';
@@ -23,43 +26,48 @@ class EditNoteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(children: [
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              const SizedBox(
-                height: 16,
-              ),
-              TitleTextField(),
-              NoteTextFilde(),
-              ColorSelecte(),
-              ElevatedButton(
-                child: Text(
-                  'Save',
-                  style: style.TitleNoteBold14,
-                ),
-                onPressed: () async {
-                  note = await NoteModel.fromMap({
-                    'category': 'All',
-                    'color': colornote.value,
-                    'Title': TitleController.text,
-                    'note': NoteController.text
-                  });
-                  NoteServise.get(context).ubdatIsCombleted(id, note);
-                  TitleController = TextEditingController();
-                  NoteController = TextEditingController();
-                  colornote = ColorApp.ColorNote1;
-                  NoteCubit.get(context).getNote();
+      body: BlocBuilder<NoteCubit, NoteState>(
+        builder: (context, state) {
+          return ListView(children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  TitleTextField(),
+                  NoteTextFilde(),
+                  ColorSelecte(),
+                  category(),
+                  ElevatedButton(
+                    child: Text(
+                      'Save',
+                      style: style.TitleNoteBold14,
+                    ),
+                    onPressed: () async {
+                      note = await NoteModel.fromMap({
+                        'category': NoteCubit.get(context).categoryitem,
+                        'color': colornote.value,
+                        'Title': TitleController.text,
+                        'note': NoteController.text
+                      });
+                      NoteServise.get(context).ubdatIsCombleted(id, note);
+                      TitleController = TextEditingController();
+                      NoteController = TextEditingController();
+                      colornote = ColorApp.ColorNote1;
+                      NoteCubit.get(context).getNote(0);
 
-                  Navigator.pop(context);
-                },
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      ]),
+            ),
+          ]);
+        },
+      ),
     );
   }
 }
