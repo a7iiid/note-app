@@ -42,25 +42,6 @@ class Think extends StatelessWidget {
       child: BlocBuilder<TheemModeCubit, TheemModeState>(
         builder: (context, state) {
           return MaterialApp.router(
-            //Localization lang
-
-            // supportedLocales: const [Locale('en'), Locale('ar')],
-            // localizationsDelegates: const [
-            //   AppLocalizations.delegate,
-            //   GlobalMaterialLocalizations.delegate,
-            //   GlobalWidgetsLocalizations.delegate,
-            //   GlobalCupertinoLocalizations.delegate
-            // ],
-            // localeResolutionCallback: (deviceLocale, supportedLocales) {
-            //   for (var locale in supportedLocales) {
-            //     if (deviceLocale != null &&
-            //         deviceLocale.languageCode == locale.languageCode) {
-            //       return deviceLocale;
-            //     }
-            //   }
-
-            //   return supportedLocales.first;
-            // },
             theme: TheemModeCubit.get(context).isChick
                 ? ThemeApp.themeapplight
                 : ThemeApp.themeappdark,

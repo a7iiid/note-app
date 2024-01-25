@@ -71,6 +71,6 @@ class NoteCubit extends Cubit<NoteState> {
     TitleController = TextEditingController();
     NoteController = TextEditingController();
     colornote = ColorApp.ColorNote1;
-    await getNote(categoryselect);
+    await getNote(0);
   }
 }

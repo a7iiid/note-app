@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:note_app/fetuers/splash/view/widget/title_app.dart';
+import 'package:note_app/fetuers/home/widget/app_bar.dart';
 
 import 'category_selector.dart';
 import 'note_list.dart';

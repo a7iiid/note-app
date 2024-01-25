@@ -10,13 +10,18 @@ class SearchNoteCubit extends Cubit<SearchNoteState> {
   static get(context) => BlocProvider.of<SearchNoteCubit>(context);
 
   void search(String query) {
-    searchfilterd =
-        allnote!.where((element) => element.title.contains(query)).toList();
-    if (searchfilterd.isNotEmpty && searchfilterd != null) {
-      emit(SearchNoteFaindNote());
-      print(searchfilterd);
+    if (query != null) {
+      searchfilterd =
+          allnote!.where((element) => element.title.contains(query)).toList();
+      if (searchfilterd.isNotEmpty && searchfilterd != null) {
+        emit(SearchNoteFaindNote());
+        print(searchfilterd);
+      } else {
+        emit(SearchNoteFilure());
+      }
     } else {
-      emit(SearchNoteFilure());
+      searchfilterd = [];
+      emit(SearchNoteFaindNote());
     }
   }
 }

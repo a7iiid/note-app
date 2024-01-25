@@ -36,7 +36,7 @@ class SearchField extends StatelessWidget {
                   ),
                   onChanged: (value) {
                     SearchNoteCubit.get(context).search(searchController.text);
-                    NoteCubit.get(context).getNote();
+                    NoteCubit.get(context).getNote(0);
                   },
                 ),
               ));

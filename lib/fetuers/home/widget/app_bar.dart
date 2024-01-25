@@ -30,6 +30,9 @@ class TitleApp extends StatelessWidget {
             style: style.AppTileStyleSemiBold24,
           ),
           const Spacer(),
+          IconButton(
+              onPressed: () => TheemModeCubit.get(context).changemode(),
+              icon: Icon(Icons.brightness_6_outlined))
         ]);
   }
 }
